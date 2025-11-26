@@ -1,104 +1,101 @@
-Reusable Login Page (Flutter + Firebase Auth)
+# 🚀 Reusable Login Page — Flutter + Firebase Authentication
 
-A modular authentication template built with Flutter and Firebase. It provides email/password login, OTP-based login, and Google Sign-In using a clean controller–repository architecture. The goal is to give developers a production-ready, easily extensible authentication layer with minimal coupling and clear domain boundaries.
+A clean, production-ready authentication template built with **Flutter**, **Firebase Auth**, and a **controller-repository architecture**. Supports **Email/Password**, **Email OTP**, and **Google Sign-In** with a fully responsive full-screen UI.
 
-Features
+---
 
-Email + Password authentication
+## ✨ Features
+- 🔐 Email & Password Login  
+- 🔢 Email OTP Authentication  
+- 🔑 Google Sign-In (Firebase)  
+- ⚡ Fast, modular & reusable architecture  
+- 🎯 Clean separation of UI, Domain & Data layers  
+- 🧪 Includes Mock Repository for offline UI testing  
+- 📱 Full-screen modern UI with consistent system bar styling  
 
-OTP-based email login (request + verify)
+---
 
-Google Sign-In via Firebase
+## 🧱 Architecture Overview
 
-Clean MVx structure (Controller, Repository, Models)
-
-Centralized error mapping & state management
-
-Full-screen UI optimized for Android
-
-Reusable authentication logic across any Flutter project
-
-Architecture
-Domain Layer
-
-LoginController
-
-Orchestrates flows
-
-Validates input
-
-Manages state via ValueNotifier<LoginState>
-
-Translates repo responses into UI-renderable state
-
-Data Layer
-
-AuthRepository interface
-
-FirebaseAuthRepository implementation
-
-MockRepo included for offline and UI testing
-
-UI Layer
-
-LoginScreenCustom
-
-Fullscreen layout
-
-Text fields, OTP UI, loading indicators
-
-Reacts to LoginController.state
-
-Folder Structure
 lib/
 │── main.dart
 │── firebase_options.dart
 │
-├── src/
-│   ├── ui/
-│   │   └── login_screen_custom.dart
-│   ├── domain/
-│   │   ├── login_controller.dart
-│   │   └── models.dart
-│   └── data/
-│       └── auth_repository.dart
+└── src/
+├── ui/
+│ └── login_screen_custom.dart
+│
+├── domain/
+│ ├── login_controller.dart
+│ └── models.dart
+│
+└── data/
+└── auth_repository.dart
 
-Prerequisites
+markdown
+Copy code
 
-Flutter SDK (latest stable)
+### UI Layer
+- Full-screen login screen  
+- Handles input, OTP mode, buttons, loading state  
 
-Firebase CLI installed
+### Domain Layer
+- `LoginController`  
+  - Handles validation  
+  - Controls OTP workflow  
+  - Manages email/password and Google OAuth  
+  - Exposes reactive `LoginState`  
 
-Google Services JSON configured
+### Data Layer
+- Abstract `AuthRepository`  
+- `FirebaseAuthRepository` implementation  
+- `MockRepo` for development/testing  
 
-Android appId matches Firebase package name:
+---
 
-com.example.login_page
+## ⚙️ Prerequisites
+- Flutter (latest stable)
+- Firebase project
+- Firebase CLI installed
+- Valid `google-services.json` with:
 
-Setup
-1. Install dependencies
+package_name: com.example.login_page
+
+yaml
+Copy code
+
+---
+
+## 🔧 Setup
+
+### 1️⃣ Install dependencies
+```sh
 flutter pub get
-
-2. Configure Firebase
+2️⃣ Configure Firebase
+sh
+Copy code
 flutterfire configure
-
-3. Run app
+3️⃣ Run the project
+sh
+Copy code
 flutter run
+🛠️ Usage
+Switch between Firebase or Mock authentication in main.dart:
 
-Usage
-
-Customize UI in login_screen_custom.dart
-
-Extend auth logic via AuthRepository
-
-Replace mock backend by swapping the repo in main.dart:
-
+dart
+Copy code
+// Production: Firebase
 final controller = LoginController(repo: FirebaseAuthRepository());
 
-Why This Template Exists
+// Development: Mock (no Firebase needed)
+final controller = LoginController(repo: MockRepo());
+Modify UI in:
 
-To reduce the repeated engineering effort required for authentication across apps. The system isolates UI from backend logic, making the entire login layer swappable, testable, and production-ready.
+bash
+Copy code
+lib/src/ui/login_screen_custom.dart
+🎯 Project Purpose
+This project provides a ready-to-use, high-quality login module for any Flutter application. It removes repetitive setup, enforces a clean architecture, and simplifies authentication for real-world apps.
 
-License
-
+📄 License
 MIT License.
